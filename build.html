@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1024px;height:1024px;background:#f4eedd;color:#1a1a1a;font-family:Georgia,'Liberation Serif','DejaVu Serif',serif;overflow:hidden}
+.paper{width:1024px;height:1024px;padding:5px 12px 5px}
+/* ---- masthead: left-aligned, teal ---- */
+.mast{background:#14524a;color:#f4eedd;display:flex;justify-content:space-between;align-items:center;padding:3px 14px 4px;border-bottom:3px solid #d99a2b}
+.mast .name{font-size:26px;font-weight:900;letter-spacing:2px;line-height:1}
+.mast .deck{font-size:12px;font-style:italic;color:#f2d8a0;margin-top:3px}
+.mast .badge{background:#b3261e;color:#fff;font-family:'Liberation Sans',Arial,sans-serif;font-weight:900;font-size:14px;letter-spacing:1px;padding:4px 10px;text-align:center;line-height:1.15;border:2px solid #f4eedd}
+.mast .badge small{display:block;font-size:9px;letter-spacing:2px;font-weight:700}
+/* ---- region bar ---- */
+.regions{display:flex;margin-top:5px;font-family:'Liberation Sans',Arial,sans-serif}
+.regions div{flex:1;text-align:center;color:#fff;font-size:10.5px;font-weight:900;letter-spacing:.5px;padding:2px 0}
+.regions .tot{background:#1a1a1a}
+.r-eu{background:#14524a}.r-as{background:#2e7d6b}.r-me{background:#8a6d1f}.r-am{background:#b3261e}.r-oc{background:#4a6b8a}.r-gl{background:#6b5a8a}
+/* ---- main + right rail ---- */
+.wrap{display:flex;gap:10px;margin-top:2px}
+.main{width:848px;flex:none}
+.rail{flex:1;background:#14524a;color:#f4eedd;padding:8px 7px;font-family:'Liberation Sans',Arial,sans-serif}
+.rail h4{font-size:10px;letter-spacing:1.5px;color:#f2d8a0;border-bottom:2px solid #d99a2b;padding-bottom:5px;text-align:center;line-height:1.35}
+.rail .stat{border-bottom:1px solid rgba(244,238,221,.3);padding:11px 0 10px;text-align:center}
+.rail .stat b{display:block;font-size:24px;line-height:1.05;color:#fff}
+.rail .stat b small{font-size:16px}
+.rail .stat span{font-size:9.5px;line-height:1.3;color:#cfe0d8;display:block;margin-top:3px}
+.rail .note{font-size:8.5px;color:#9dbdb2;line-height:1.35;margin-top:6px;text-align:center}
+.rail .next{margin-top:12px;border:1px solid #d99a2b;padding:7px 7px 6px}
+.rail .next h5{font-size:9px;letter-spacing:2px;color:#f2d8a0;border-bottom:1px solid #d99a2b;padding-bottom:4px;margin-bottom:6px;text-align:center}
+.rail .next div{font-size:9px;line-height:1.35;color:#f4eedd;margin-bottom:5px}
+.rail .next div b{color:#f2d8a0}
+.rail .fast{margin-top:12px;border:1px solid #f2d8a0;padding:7px 7px 6px}
+.rail .fast h5{font-size:9px;letter-spacing:2px;color:#f2d8a0;border-bottom:1px solid #f2d8a0;padding-bottom:4px;margin-bottom:6px;text-align:center}
+.rail .fast div{font-size:9px;line-height:1.35;color:#f4eedd;margin-bottom:5px}
+.rail .fast div b{color:#f2d8a0}
+/* ---- leads ---- */
+.leads{display:flex;gap:9px}
+.lead{flex:1;border-bottom:2px solid #14524a;padding-bottom:5px}
+.lead svg{width:100%;height:34px;display:block;border:1px solid #14524a}
+.kick{font-family:'Liberation Sans',Arial,sans-serif;font-size:9.5px;letter-spacing:2px;color:#b3261e;font-weight:900;margin-top:3px}
+.lead h2{font-size:20px;line-height:1.02;margin:2px 0 3px}
+.lead .d{font-family:'Liberation Sans',Arial,sans-serif;font-size:10.5px;line-height:1.22;color:#222}
+.src{font-family:'Liberation Sans',Arial,sans-serif;font-size:8.5px;color:#666;letter-spacing:.5px;margin-top:3px}
+.pill{display:inline-block;background:#d99a2b;color:#1a1a1a;font-family:'Liberation Sans',Arial,sans-serif;font-size:8.5px;font-weight:900;padding:1px 5px;margin-left:4px;vertical-align:1px}
+/* ---- time bands ---- */
+.band{margin-top:2px}
+.band>h3{font-family:'Liberation Sans',Arial,sans-serif;font-size:10.5px;letter-spacing:2px;color:#f4eedd;background:#14524a;padding:0 8px;display:flex;justify-content:space-between}
+.band>h3 span:last-child{color:#f2d8a0;letter-spacing:1px;font-weight:700}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:4px 10px;margin-top:4px}
+.card{border-bottom:1px solid #c9bfa4;padding-bottom:2px}
+.card svg{width:100%;height:14px;display:block;border:1px solid #14524a}
+.card h4{font-size:14px;line-height:1.05;margin:3px 0 2px}
+.card .d{font-family:'Liberation Sans',Arial,sans-serif;font-size:10.5px;line-height:1.22;color:#222}
+.card .src{margin-top:1px}
+.idx{list-style:none;columns:2;column-gap:14px;margin-top:4px}
+.idx li{font-family:'Liberation Sans',Arial,sans-serif;font-size:10.5px;line-height:1.28;color:#222;margin-bottom:2px;break-inside:avoid}
+.idx li b{color:#14524a}
+/* ---- dotted map inside MORNING band ---- */
+.mapbox{margin-top:4px;border:1px solid #14524a;background:#eaf2ee;padding:2px 6px 1px}
+.mapbox h5{font-family:'Liberation Sans',Arial,sans-serif;font-size:9.5px;letter-spacing:1.5px;color:#14524a}
+.mapbox h5 span{color:#b3261e}
+.mapbox svg{width:100%;height:28px;display:block}
+.mapbox .cap{font-family:'Liberation Sans',Arial,sans-serif;font-size:8px;color:#555;line-height:1.25}
+/* ---- date check stamp strip ---- */
+.dc{border:2px dashed #b3261e;padding:3px 8px 2px;margin-top:3px}
+.dc h5{font-family:'Liberation Sans',Arial,sans-serif;font-size:10.5px;letter-spacing:1.5px;color:#b3261e}
+.dc h5 span{color:#14524a}
+.dc ol{list-style:none;columns:4;column-gap:12px;margin-top:2px}
+.dc li{font-family:'Liberation Sans',Arial,sans-serif;font-size:9.5px;line-height:1.2;color:#333;margin-bottom:1px;break-inside:avoid}
+.dc li b{color:#b3261e}
+.foot{font-family:'Liberation Sans',Arial,sans-serif;font-size:8.5px;line-height:1.3;color:#444;margin-top:3px;border-top:1px solid #14524a;padding-top:2px}
+.foot b{color:#14524a;letter-spacing:.5px}
+</style></head><body><div class="paper">
+<!-- masthead -->
+<div class="mast"><div><div class="name">THE TWENTIETH</div><div class="deck">Friday 20 November 2026 — The world, in one page</div></div><div class="badge">20 NOV · FRI 2026<small>FIVE ACTS · 27 STORIES</small></div></div>
+<!-- region bar -->
+<div class="regions"><div class="r-eu">EUROPE 7</div><div class="r-as">ASIA 5</div><div class="r-me">MIDDLE EAST 4</div><div class="r-am">AMERICAS 4</div><div class="r-oc">OCEANIA 2</div><div class="r-gl">GLOBAL 5</div><div class="tot">= 27 STORIES</div></div>
+<div class="wrap"><div class="main">
+<!-- ======== 3 LEADS ======== -->
+<div class="leads">
+<div class="lead">
+<svg viewBox="0 0 276 76" preserveAspectRatio="none"><rect width="276" height="76" fill="#0b1e2c"/><circle cx="232" cy="16" r="11" fill="#f2d8a0"/><circle cx="228" cy="13" r="9" fill="#0b1e2c" opacity=".55"/><g fill="#f4eedd"><circle cx="30" cy="10" r="1.6"/><circle cx="70" cy="18" r="1.3"/><circle cx="120" cy="8" r="1.6"/><circle cx="170" cy="14" r="1.3"/><circle cx="200" cy="6" r="1.5"/></g><path d="M10 70 Q138 34 266 62" fill="none" stroke="#d99a2b" stroke-width="3"/><path d="M10 70 Q138 34 266 62" fill="none" stroke="#f4eedd" stroke-width="1" stroke-dasharray="4 5"/><g fill="#0b1e2c" stroke="#f4eedd" stroke-width="1.2"><rect x="96" y="52" width="18" height="18"/><rect x="120" y="46" width="18" height="24"/><rect x="144" y="54" width="18" height="16"/></g><g fill="#f2d8a0"><rect x="100" y="56" width="3" height="3"/><rect x="107" y="60" width="3" height="3"/><rect x="124" y="50" width="3" height="3"/><rect x="131" y="56" width="3" height="3"/><rect x="148" y="58" width="3" height="3"/></g><g fill="none" stroke="#ff6b5e" stroke-width="1.4" stroke-dasharray="3 3"><path d="M40 12 L80 30"/><path d="M150 10 L180 34"/><path d="M210 20 L226 44"/></g><g fill="#ff6b5e"><circle cx="80" cy="30" r="2.6"/><circle cx="180" cy="34" r="2.6"/><circle cx="226" cy="44" r="2.6"/></g></svg>
+<div class="kick">1 · KYIV — LEAD</div><h2>Kyiv&rsquo;s Bridges Burn</h2>
+<div class="d">Biggest overnight strike: 400+ drones, 110+ missiles. 8 killed (6 in Kyiv), 28 injured. Bridges hit — Podilsko-Voskresenskyi, Darnytskyi, Pivdennyi — worst of the war.</div>
+<div class="src">REUTERS / CNN <span class="pill">UKRAINE SAYS</span></div></div>
+<div class="lead">
+<svg viewBox="0 0 276 76" preserveAspectRatio="none"><rect width="276" height="76" fill="#cfe0e8"/><path d="M0 60 L276 60 L276 76 L0 76 Z" fill="#2e7d6b"/><g fill="#f4eedd"><rect x="30" y="62" width="12" height="8"/><rect x="60" y="64" width="10" height="6"/><rect x="200" y="62" width="12" height="8"/><rect x="230" y="64" width="10" height="6"/></g><g fill="none" stroke="#14524a" stroke-width="4" opacity=".9"><path d="M138 38 a10 10 0 1 1 10 -10"/><path d="M138 38 a20 20 0 1 1 20 -20" opacity=".75"/><path d="M138 38 a30 30 0 1 1 30 -30" opacity=".55"/><path d="M138 38 a40 40 0 1 1 40 -40" opacity=".35"/></g><circle cx="138" cy="38" r="6" fill="#b3261e"/><g stroke="#14524a" stroke-width="1.6"><line x1="20" y1="6" x2="14" y2="20"/><line x1="52" y1="2" x2="46" y2="16"/><line x1="220" y1="4" x2="214" y2="18"/><line x1="252" y1="8" x2="246" y2="22"/></g></svg>
+<div class="kick">2 · CYCLONE AKVAN — LEAD</div><h2>Akvan Hits Odisha</h2>
+<div class="d">Landfall ~02:00 UTC near Gopalpur, done 11:20am IST. Winds 70–80, gusting 90 km/h. 300,000+ evacuated; 9,341 shelters. No major damage; 3rd cyclone in 24 days.</div>
+<div class="src">IMD VIA HINDU BUSINESSLINE</div></div>
+<div class="lead">
+<svg viewBox="0 0 276 76" preserveAspectRatio="none"><rect width="276" height="76" fill="#e8e0c8"/><circle cx="138" cy="52" r="26" fill="#d99a2b"/><path d="M0 52 L276 52 L276 76 L0 76 Z" fill="#14524a"/><g stroke="#f4eedd" stroke-width="2"><line x1="40" y1="52" x2="40" y2="26"/><line x1="100" y1="52" x2="100" y2="30"/><line x1="160" y1="52" x2="160" y2="30"/><line x1="220" y1="52" x2="220" y2="26"/></g><g><rect x="40" y="26" width="26" height="15" fill="#b3261e"/><rect x="100" y="30" width="26" height="13" fill="#2e7d6b"/><rect x="160" y="30" width="26" height="13" fill="#8a6d1f"/><rect x="220" y="26" width="26" height="15" fill="#4a6b8a"/></g><g fill="#f4eedd"><circle cx="53" cy="33" r="2.5"/><circle cx="113" cy="36" r="2.5"/><circle cx="173" cy="36" r="2.5"/><circle cx="233" cy="33" r="2.5"/></g><rect x="70" y="58" width="136" height="5" fill="#f2d8a0"/></svg>
+<div class="kick">3 · COP31 — LEAD</div><h2>COP31: Fossils Erased</h2>
+<div class="d">Antalya: draft drops ALL fossil-fuel mention. CCUS 500 Mt/yr by 2035; electrification 35%; $120bn adaptation target gone. Panama: no deal without an oil cap.</div>
+<div class="src">AP / CNN</div></div>
+</div>
+
+<!-- ======== OVERNIGHT 00–06 UTC ======== -->
+<div class="band"><h3><span>ACT I · OVERNIGHT</span><span>00–06 UTC</span></h3>
+<div class="cards">
+<div class="card">
+<svg viewBox="0 0 414 26" preserveAspectRatio="none"><rect width="414" height="26" fill="#0b1e2c"/><g fill="none" stroke="#ff6b5e" stroke-width="1.8" stroke-dasharray="4 3"><path d="M30 24 Q90 4 150 10"/><path d="M180 24 Q250 6 320 12"/><path d="M330 24 Q370 10 400 14"/></g><g fill="#ff6b5e"><circle cx="150" cy="10" r="3"/><circle cx="320" cy="12" r="3"/><circle cx="400" cy="14" r="3"/></g><g fill="#f4eedd"><circle cx="30" cy="24" r="2"/><circle cx="180" cy="24" r="2"/><circle cx="330" cy="24" r="2"/></g></svg>
+<h4>Three Intruders Over Poland</h4><div class="d">Kh-101 at Nowy Lipowiec (~05:40 GMT), 2nd missile at Rudnik nad Sanem, jet drone at Mo&#322;odycz. No injuries. Tusk: &ldquo;no doubt&rdquo; Russian.</div><div class="src">REUTERS</div></div>
+<div class="card">
+<svg viewBox="0 0 414 26" preserveAspectRatio="none"><rect width="414" height="26" fill="#0e2f2b"/><rect x="200" y="3" width="16" height="20" fill="#76b900"/><rect x="204" y="7" width="8" height="12" fill="#0e2f2b"/><g stroke="#76b900" stroke-width="2"><line x1="200" y1="7" x2="192" y2="7"/><line x1="200" y1="13" x2="192" y2="13"/><line x1="200" y1="19" x2="192" y2="19"/><line x1="216" y1="7" x2="224" y2="7"/><line x1="216" y1="13" x2="224" y2="13"/><line x1="216" y1="19" x2="224" y2="19"/></g><text x="16" y="18" font-family="Arial" font-size="14" font-weight="bold" fill="#f4eedd">SUBPOENA</text><text x="300" y="18" font-family="Arial" font-size="13" fill="#f2d8a0">02:18 UTC</text></svg>
+<h4>California Subpoenas Nvidia</h4><div class="d">AG Rob Bonta probes whether chips/secrets reached China, and whether Nvidia misled investors. Follows ex-CEO Jensen Huang&rsquo;s Nov 12 exit; SEC also investigating.</div><div class="src">REUTERS / WSJ</div></div>
+</div>
+<ol class="idx">
+<li><b>14</b> KHARKIV — Hospital drone strike; 4 hurt, 50+ windows out. <i>Ukrinform / BBC</i></li>
+</ol></div>
+<!-- ======== MORNING 06–12 UTC ======== -->
+<div class="band"><h3><span>ACT II · MORNING</span><span>06–12 UTC</span></h3>
+<div class="cards">
+<div class="card">
+<svg viewBox="0 0 414 26" preserveAspectRatio="none"><rect width="414" height="26" fill="#f2d8a0"/><circle cx="130" cy="13" r="11" fill="#1d4e89"/><circle cx="284" cy="13" r="11" fill="#1d4e89"/><g fill="#fff"><circle cx="130" cy="13" r="4"/><circle cx="284" cy="13" r="4"/></g><g fill="#b3261e"><circle cx="130" cy="6" r="1.6"/><circle cx="130" cy="20" r="1.6"/><circle cx="284" cy="6" r="1.6"/><circle cx="284" cy="20" r="1.6"/></g><text x="180" y="18" font-family="Arial" font-size="13" font-weight="bold" fill="#14524a">£5.1BN / YR</text></svg>
+<h4>UK–EU Reset Sealed</h4><div class="d">Brussels deal: food/SPS pact up to &pound;5.1bn a year, 100,000 youth visas, ETS link. PM Andy Burnham; tuition-fee talks continue.</div><div class="src">REUTERS</div></div>
+<div class="card">
+<svg viewBox="0 0 414 26" preserveAspectRatio="none"><rect width="414" height="26" fill="#0b0b12"/><circle cx="70" cy="13" r="10" fill="#b9b3a8"/><circle cx="66" cy="10" r="2" fill="#8a8578"/><circle cx="74" cy="16" r="1.6" fill="#8a8578"/><path d="M84 13 Q200 2 320 13" fill="none" stroke="#d99a2b" stroke-width="1.6" stroke-dasharray="5 4"/><rect x="316" y="9" width="12" height="8" fill="#2e7d6b"/><rect x="328" y="11" width="8" height="4" fill="#d99a2b"/><text x="360" y="18" font-family="Arial" font-size="12" font-weight="bold" fill="#f4eedd">8+ YRS</text><g fill="#fff"><circle cx="140" cy="5" r="1.2"/><circle cx="200" cy="20" r="1.2"/><circle cx="260" cy="6" r="1.2"/></g></svg>
+<h4>BepiColombo Reaches Mercury</h4><div class="d">Arrives after 8+ years, 6bn miles, 9 flybys; launched Oct 2018. Orbit burn Saturday 21 Nov; science April 2027. ESA MPO + JAXA Mio.</div><div class="src">GUARDIAN</div></div>
+<div class="card">
+<svg viewBox="0 0 414 26" preserveAspectRatio="none"><rect width="414" height="26" fill="#14524a"/><text x="14" y="19" font-family="Georgia" font-size="18" font-weight="bold" fill="#f2d8a0">¥</text><path d="M70 20 L120 14 L170 8 L220 4" stroke="#f4eedd" stroke-width="2.4" fill="none"/><path d="M212 4 L220 4 L218 12" stroke="#f4eedd" stroke-width="2.4" fill="none"/><text x="250" y="19" font-family="Arial" font-size="14" font-weight="bold" fill="#fff">CPI 2.3%</text></svg>
+<h4>Japan CPI 2.3%, China Holds</h4><div class="d">Japan Oct CPI 2.3% (from 2.1%), core 2.2% — highest since Nov 2025. BoJ hike eyed Dec 17–18 to 1.5%. China held 1-yr LPR 3.00%, 5-yr 3.50%, an 18th month.</div><div class="src">REUTERS</div></div>
+<div class="card">
+<svg viewBox="0 0 414 26" preserveAspectRatio="none"><rect width="414" height="26" fill="#f4eedd"/><g fill="#14524a"><rect x="30" y="12" width="46" height="10"/><rect x="90" y="12" width="46" height="10"/><rect x="150" y="12" width="46" height="10"/></g><g fill="#f4eedd"><circle cx="53" cy="9" r="4"/><circle cx="113" cy="9" r="4"/><circle cx="173" cy="9" r="4"/></g><circle cx="330" cy="13" r="9" fill="none" stroke="#b3261e" stroke-width="2.4"/><line x1="324" y1="7" x2="336" y2="19" stroke="#b3261e" stroke-width="2.4"/><text x="348" y="18" font-family="Arial" font-size="12" font-weight="bold" fill="#b3261e">111</text></svg>
+<h4>111 Caught Cheating Suneung</h4><div class="d">111 caught with unauthorised smart devices; 5 in the act — smart glasses, subminiature camera, earphones. 54 found via 3 alerts. ~497,000 sat.</div><div class="src">BBC</div></div>
+</div>
+<div class="mapbox"><h5>WHERE IT HAPPENED <span>· PINS 1–10</span></h5>
+<svg viewBox="0 0 848 28" preserveAspectRatio="none"><defs><pattern id="dt" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.6" fill="#14524a"/></pattern></defs><rect width="848" height="28" fill="#dcebe4"/><g fill="url(#dt)"><path d="M20,4 L90,2 L160,4 L200,6 L210,10 L180,14 L140,16 L100,14 L50,12 L20,10 Z"/><path d="M225,14 L255,16 L280,20 L270,26 L245,27 L228,22 Z"/><path d="M400,3 L440,2 L475,4 L485,8 L460,11 L425,10 L400,8 Z"/><path d="M405,12 L445,11 L475,14 L480,20 L465,26 L435,27 L415,22 L402,17 Z"/><path d="M490,2 L560,1 L640,3 L720,2 L800,4 L825,7 L790,11 L720,13 L650,12 L580,13 L510,11 L490,7 Z"/><path d="M700,20 L745,19 L775,22 L760,26 L715,26 Z"/></g><g font-family="Arial" font-size="8" font-weight="bold" text-anchor="middle"><g><circle cx="487" cy="6" r="5" fill="#b3261e"/><text x="487" y="9" fill="#fff">1</text></g><g><circle cx="640" cy="10" r="5" fill="#b3261e"/><text x="640" y="13" fill="#fff">2</text></g><g><circle cx="480" cy="9" r="5" fill="#b3261e"/><text x="480" y="12" fill="#fff">3</text></g><g><circle cx="468" cy="5" r="5" fill="#14524a"/><text x="468" y="8" fill="#fff">4</text></g><g><circle cx="765" cy="8" r="5" fill="#14524a"/><text x="765" y="11" fill="#fff">5</text></g><g><circle cx="418" cy="5" r="5" fill="#14524a"/><text x="418" y="8" fill="#fff">6</text></g><g><circle cx="465" cy="11" r="5" fill="#14524a"/><text x="465" y="14" fill="#fff">7</text></g><g><circle cx="255" cy="20" r="5" fill="#14524a"/><text x="255" y="23" fill="#fff">8</text></g><g><circle cx="545" cy="10" r="5" fill="#14524a"/><text x="545" y="13" fill="#fff">9</text></g><g><circle cx="745" cy="22" r="5" fill="#14524a"/><text x="745" y="25" fill="#fff">10</text></g></g></svg>
+<div class="cap">1 Kyiv · 2 Gopalpur (Akvan) · 3 Antalya (COP31) · 4 Warsaw · 5 Tokyo · 6 London · 7 Rome · 8 São Paulo · 9 Kharg Island · 10 Port Moresby</div></div>
+<ol class="idx">
+<li><b>15</b> XI HAILS AUSTRALIA &ldquo;TURNAROUND&rdquo; — Shenzhen APEC sidelines. <i>Reuters</i></li>
+<li><b>16</b> LULA VISITS RAONI, 94 — Brazil recognises 362,000 ha territory. <i>AP</i></li>
+<li><b>17</b> TWO TANKERS HIT MINES — 4m+ barrels, Strait of Hormuz. <i>UKMTO</i></li>
+</ol></div>
+
+<!-- ======== MIDDAY 12–15 UTC ======== -->
+<div class="band"><h3><span>ACT III · MIDDAY</span><span>12–15 UTC</span></h3>
+<div class="cards">
+<div class="card">
+<svg viewBox="0 0 414 26" preserveAspectRatio="none"><rect width="414" height="26" fill="#1a1a1a"/><g fill="#b3261e"><rect x="40" y="6" width="16" height="14"/><rect x="110" y="10" width="16" height="10"/><rect x="180" y="14" width="16" height="6"/><rect x="250" y="4" width="16" height="16"/></g><g fill="#ff6b5e"><rect x="44" y="4" width="8" height="2"/><rect x="114" y="8" width="8" height="2"/><rect x="184" y="12" width="8" height="2"/><rect x="254" y="2" width="8" height="2"/></g><text x="300" y="18" font-family="Arial" font-size="13" font-weight="bold" fill="#f2d8a0">−6.23%</text></svg>
+<h4>Asia&rsquo;s AI Rout</h4><div class="d">Nikkei 56,436.65 −5.06%; KOSPI 4,869.96 −5.21%; Taiex 36,033.29 −6.23%; Hang Seng 22,410.80 −1.89%; Shanghai 3,533.79 −1.22%. SoftBank −14.5%, Kioxia −11.7%, Advantest −10.3%.</div><div class="src">CNBC / AL JAZEERA</div></div>
+<div class="card">
+<svg viewBox="0 0 414 26" preserveAspectRatio="none"><rect width="414" height="26" fill="#f4eedd"/><path d="M30 18 L60 8 L90 18" fill="none" stroke="#14524a" stroke-width="2.4"/><circle cx="60" cy="8" r="5" fill="#b3261e"/><g stroke="#b3261e" stroke-width="1.6" fill="none"><path d="M66 10 Q80 4 92 10"/><path d="M66 12 Q80 6 92 12"/></g><text x="140" y="18" font-family="Arial" font-size="13" font-weight="bold" fill="#b3261e">SCIOPERO</text><g fill="#14524a"><circle cx="300" cy="13" r="3"/><circle cx="330" cy="13" r="3"/><circle cx="360" cy="13" r="3"/></g></svg>
+<h4>Italy Stops for a Day</h4><div class="d">CGIL strike vs Meloni&rsquo;s &euro;26bn ($30bn) 2027 budget; marches in Rome, Milan, Naples, Genoa, Bologna, Bari, Turin. Air/rail excluded.</div><div class="src">REUTERS</div></div>
+</div>
+<ol class="idx">
+<li><b>18</b> GEN Z REGELT — Protests in 73 cities; school strike in 99. <i>Al Jazeera</i></li>
+<li><b>19</b> BRAZIL SELLS $1BN — Dollar neared 5.93 reais. <i>One Turn</i></li>
+<li><b>20</b> IRAN WAR COST: $48.3BN — Up from $47.1bn. <i>AP</i></li>
+</ol></div>
+
+<!-- ======== AFTERNOON 15–19 UTC ======== -->
+<div class="band"><h3><span>ACT IV · AFTERNOON</span><span>15–19 UTC</span></h3>
+<ol class="idx">
+<li><b>21</b> IRAQ: LEAVE BY 8PM — Kataib Hezbollah to quit Jurf al-Sakhar. <i>Reuters</i></li>
+<li><b>22</b> MYANMAR: ICJ RULING &ldquo;UNFAIR&rdquo; — 10,000 Rohingya to Turkey. <i>Reuters</i></li>
+<li><b>23</b> SENATE BLOCKS IRAN VOTE — Republicans stop resolution, 48–51. <i>AP</i></li>
+<li><b>24</b> RIO TINTO PAYS $250M — Panguna mine repairs begin. <i>One Turn</i></li>
+<li><b>25</b> POLAND GAS PACT — With Hungary, Czechia, Slovakia, Lithuania. <i>olivlaw</i></li>
+</ol></div>
+<!-- ======== EVENING 19–24 UTC ======== -->
+<div class="band"><h3><span>ACT V · EVENING</span><span>19–24 UTC</span></h3>
+<div class="cards">
+<div class="card">
+<svg viewBox="0 0 414 26" preserveAspectRatio="none"><defs><linearGradient id="gta" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6b2a6e"/><stop offset=".55" stop-color="#c94b6d"/><stop offset="1" stop-color="#ff9a3d"/></linearGradient></defs><rect width="414" height="26" fill="url(#gta)"/><circle cx="330" cy="12" r="8" fill="#f2d8a0"/><g fill="#1a1a1a"><path d="M30 26 L36 8 L42 26 Z"/><path d="M40 12 Q48 6 56 12" fill="none" stroke="#1a1a1a" stroke-width="2"/><path d="M60 26 L66 10 L72 26 Z"/><path d="M64 14 Q72 8 80 14" fill="none" stroke="#1a1a1a" stroke-width="2"/></g><rect y="20" width="414" height="6" fill="#1a1a1a"/><text x="130" y="17" font-family="Arial" font-size="13" font-weight="bold" fill="#fff">GTA VI · DAY ONE</text></svg>
+<h4>GTA VI: $2.36bn in a Day</h4><div class="d">24.58m copies day one; ~75% PS5 (18.44m, $1.77bn), Xbox 6.15m ($588m). GTA V did 11.21m / $815.7m. First reported 20 Nov.</div><div class="src">SENSOR TOWER VIA VGC <span class="pill">ESTIMATE</span></div></div>
+<div class="card">
+<svg viewBox="0 0 414 26" preserveAspectRatio="none"><rect width="414" height="26" fill="#eaf2ee"/><g stroke="#14524a" stroke-width="1.8" fill="none"><path d="M170 2 Q190 7 170 12 Q150 17 170 22"/><path d="M200 2 Q180 7 200 12 Q220 17 200 22"/></g><g stroke="#b3261e" stroke-width="1.4"><line x1="176" y1="5" x2="194" y2="9"/><line x1="176" y1="19" x2="194" y2="15"/><line x1="185" y1="12" x2="185" y2="12"/></g><g><rect x="40" y="7" width="26" height="12" rx="6" fill="#d99a2b"/><rect x="40" y="7" width="13" height="12" rx="6" fill="#b3261e"/><rect x="90" y="7" width="26" height="12" rx="6" fill="#2e7d6b"/><rect x="103" y="7" width="13" height="12" rx="6" fill="#14524a"/></g><text x="250" y="18" font-family="Arial" font-size="13" font-weight="bold" fill="#14524a">60.7% RESPOND</text></svg>
+<h4>Cancer Drug: 60.7% Respond</h4><div class="d">Daraxonrasib + chemo, 61 patients: tumours shrank or vanished in 60.7%, complete responses 8.2%, disease control 90.2%, PFS 12.8 mo, ~77% alive at 1 yr.</div><div class="src">EORTC ENA 2026 <span class="pill">EARLY TRIAL</span></div></div>
+</div>
+<ol class="idx">
+<li><b>26</b> IRAN&rsquo;S 14-TANKER CONVOY — Near Kharg Island; Brent $92.77. <i>regionalert</i></li>
+<li><b>27</b> YOUTH PROTEST IN 25+ COUNTRIES — Costs and militarisation. <i>One Turn</i></li>
+</ol></div>
+<!-- ======== DATE CHECK ======== -->
+<div class="dc"><h5>DATE CHECK — YESTERDAY, 19 NOVEMBER <span>· NOT TODAY: DO NOT COUNT THESE AS 20 NOV</span></h5>
+<ol>
+<li><b>1</b> Trump–Xi–Putin Shenzhen declaration</li>
+<li><b>2</b> ICJ: Myanmar guilty, 9–6</li>
+<li><b>3</b> Anthropic IPO $83&rarr;$97.17, $81.3bn</li>
+<li><b>4</b> GTA VI midnight launch (Metacritic 99)</li>
+<li><b>5</b> COP31 draft two drops fossil fuels</li>
+<li><b>6</b> Suneung: 550,000+ sit the exam</li>
+<li><b>7</b> Akvan nears Odisha</li>
+<li><b>8</b> 130 pupils freed, Nigeria</li>
+<li><b>9</b> Australia jobs 4.9%</li>
+<li><b>10</b> Fiona the hippo dies, 9</li>
+<li><b>11</b> Tonga declares drought emergency</li>
+<li><b>12</b> Dakar boat capsize: 4 dead</li>
+<li><b>13</b> Indonesia asset-forfeiture law</li>
+<li><b>14</b> Bukele seeks third term</li>
+</ol></div>
+<div class="foot"><b>EVERY STORY HERE</b> happened, or was first reported, on Friday 20 November 2026. &nbsp;·&nbsp; <b>ALSO TODAY:</b> Mexico&rsquo;s Revolution Day · Brazil&rsquo;s Black Consciousness Day<br>Sources: Reuters · AP · BBC · CNN · CNBC · Guardian · IMD · EORTC · ONS · UKMTO · olivlaw · regionalert · One Turn · Ukrinform · Sensor Tower via VGC</div>
+</div><!-- /main -->
+<!-- ======== RIGHT RAIL ======== -->
+<div class="rail"><h4>BY THE<br>NUMBERS</h4>
+<div class="stat"><b>8</b><span>killed in Kyiv&rsquo;s overnight strike</span></div>
+<div class="stat"><b>300,000+</b><span>evacuated ahead of Akvan</span></div>
+<div class="stat"><b>−6.23%</b><span>Taiex, Asia&rsquo;s AI rout</span></div>
+<div class="stat"><b>$2.36<small>bn</small></b><span>GTA VI, day-one revenue</span></div>
+<div class="stat"><b>111</b><span>caught cheating the Suneung</span></div>
+<div class="stat"><b>$48.3<small>bn</small></b><span>cost of the Iran war so far</span></div>
+<div class="stat"><b>60.7%</b><span>tumours shrank or vanished in the cancer trial</span></div>
+<div class="note">All figures as reported on 20 Nov 2026. Times are approximate UTC.</div>
+<div class="fast"><h5>IN 30 SECONDS</h5>
+<div><b>WAR</b> — Kyiv&rsquo;s worst night; Poland breached; $48.3bn bill.</div>
+<div><b>WEATHER</b> — Akvan slams Odisha; COP31 erases fossil fuels.</div>
+<div><b>MONEY</b> — AI stocks rout; UK&ndash;EU reset; GTA VI banks $2.36bn.</div></div>
+<div class="next"><h5>COMING UP</h5>
+<div><b>SAT 21 NOV</b> — BepiColombo orbit burn; COP31 overtime</div>
+<div><b>NEXT COP</b> — Addis Ababa 2027; US not taking part</div>
+<div><b>FRI 21:00 – SAT 20:00</b> — Italy rail strike</div>
+<div><b>DEC 1</b> — Ex-Nvidia chief Huang testifies to Congress</div></div>
+</div>
+</div><!-- /wrap -->
+</div></body></html>
